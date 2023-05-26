@@ -1,16 +1,23 @@
 from tkinter import *
 from tkinter import ttk
-import telebot
+from TBot import *
 
-def tbot(key):
-    bot = telebot.TeleBot(key, parse_mode=None)
-    bot.send_message(375230092, "Бот запущен")
+bot_init = None
+with open(file='secret_file.txt', mode='r') as file:
+    bot_init = TBot(file.readline())
 
 def get_key(window, entry):
+    global bot_init
     window.grab_release()
     key = entry.get()
     window.destroy()
-    tbot(key)
+    bot_init = TBot(key)
+    
+def bot_run():
+    asyncio.run(bot_init.bot_run())
+    
+def bot_stop():
+    bot_init.bot_stop()
 
 def click():
     window = Toplevel()
