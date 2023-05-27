@@ -1,10 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 import threading
-import Functions as f
+from Functions import bot_stop, click, bot_run
 
 def run_async(event=None):
-    threading.Thread(target=f.bot_run).start()
+    threading.Thread(target=bot_run).start()
 
 root = Tk()
 root.title('TLBot v0.01')
@@ -14,13 +14,13 @@ root.attributes("-alpha", 1)
 
 root.update_idletasks()
 
-btn_1 = ttk.Button(text = "Ключ", command=f.click)
+btn_1 = ttk.Button(text = "Ключ", command=click)
 btn_1.place(x = 30, y = 30, width=80, height=40)
 
 btn_2 = ttk.Button(text = "Пуск", command=run_async)
 btn_2.place(x = 120, y = 30, width=50, height=40)
 
-btn_3 = ttk.Button(text = "Стоп", command=f.bot_stop)
+btn_3 = ttk.Button(text = "Стоп", command=bot_stop)
 btn_3.place(x = 180, y = 30, width=50, height=40)
 
 label = Label(text = "Подключение бота")
