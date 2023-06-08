@@ -19,7 +19,7 @@ def bot_run():
 def bot_stop():
     bot_init.bot_stop()
 
-def click():
+def enter_key():
     window = Toplevel()
     window.title("Ввод ключа Бота")
     window.geometry("500x80+300+300")
@@ -38,3 +38,6 @@ def click():
     close_button.place(x = 415, y = 28)
     
     window.grab_set()
+
+def add_data(query, answer):
+    asyncio.run(Database.add_data(query,answer))

@@ -2,6 +2,7 @@ import asyncio
 import telegram
 from telegram.error import NetworkError
 import Dict_bot
+import Database
 
 UPDATE_ID = None
 flag = None
@@ -14,8 +15,8 @@ async def update_bot(bot):
                   
         id_chat =  (await bot.get_updates())[0].message.from_user.id
         text = ((await bot.get_updates())[0].message.text)
-        if text in Dict_bot.dict_command.keys():
-            await bot.send_message(text=Dict_bot.dict_command[text], chat_id=id_chat)
+        if await Database.read_data(text) != "":
+            await bot.send_message(text= await Database.read_data(text), chat_id=id_chat)
         else: await bot.send_message(text="Ответа на это нет", chat_id=id_chat)
 
 class TBot:
@@ -36,8 +37,8 @@ class TBot:
             except IndexError:
                 UPDATE_ID = None
             while flag:
-                asyncio.sleep(1000)
                 try:
+                    asyncio.sleep(1000)
                     await update_bot(bot)
                 except NetworkError:
                     asyncio.sleep(5)
@@ -45,5 +46,3 @@ class TBot:
     def bot_stop(self):
         global flag
         flag = False
-    
-    
