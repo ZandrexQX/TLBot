@@ -1,8 +1,5 @@
-from tkinter import *
-from tkinter import ttk
 import threading
 
-import Database
 from Functions import *
 
 def run_async(event=None):
@@ -10,7 +7,7 @@ def run_async(event=None):
 
 root = Tk()
 root.title('TLBot v0.01')
-root.geometry('400x500+500+300')
+root.geometry('400x250+500+300')
 root.resizable(False,False)
 root.attributes("-alpha", 1)
 

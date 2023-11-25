@@ -1,7 +1,6 @@
 import asyncio
 import telegram
 from telegram.error import NetworkError
-import Dict_bot
 import Database
 
 UPDATE_ID = None
